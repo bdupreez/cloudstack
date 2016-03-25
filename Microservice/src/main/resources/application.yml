@@ -1,14 +1,16 @@
 spring:
-  application:
-    name: microservice
   jpa:
     hibernate:
       ddl-auto: create
+  rabbitmq:
+    host: dockerhost
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
-
-version: Default Version
+version:
+  name: Default
+  major: 0.1
+  build: 10

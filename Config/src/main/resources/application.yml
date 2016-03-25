@@ -1,2 +1,24 @@
 server:
   port: 8888
+
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://bdupreez@bitbucket.org/bdupreez/cloudstackconfig.git
+          username: bdupreez
+          password: c0ncurrently
+          searchPaths: microservice
+        health:
+          microservice:
+            name: microservice
+  rabbitmq:
+    host: dockerhost
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
