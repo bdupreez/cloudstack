@@ -8,10 +8,11 @@ spring:
     config:
       server:
         git:
-          uri: https://bdupreez@bitbucket.org/bdupreez/cloudstackconfig.git
-          username: bdupreez
-          password: c0ncurrently
-          searchPaths: microservice
+          uri: /Users/brian/Development/Code/CloudStackConfig
+#          uri: https://bdupreez@bitbucket.org/bdupreez/cloudstackconfig.git
+#          username: bdupreez
+#          password:
+#          searchPaths: microservice
         health:
           microservice:
             name: microservice

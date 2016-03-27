@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+    tyk_gateway:
+        image: tykio/tyk-gateway:latest
+        ports:
+            - "80:8080"
+            - "8080:8080"
+        volumes:
+            - ./tyk.conf:/opt/tyk-gateway/tyk.conf
+        networks:
+            - gateway
+    tyk_dashboard:
+        image: tykio/tyk-dashboard:latest
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+        networks:
+            - gateway
+    tyk_pump:
+        image: tykio/tyk-pump-docker-pub:latest
+        networks:
+            - gateway
+    tyk_redis:
+        image: redis:latest
+        hostname: redis
+        networks:
+            gateway:
+                aliases:
+                    - redis
+    tyk_mongo:
+        image: mongo:latest
+        command: ["mongod", "--smallfiles"]
+        hostname: mongo
+        networks:
+            gateway:
+                aliases:
+                    - mongo
+
+networks:
+    gateway:
