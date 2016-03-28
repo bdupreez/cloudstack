@@ -27,7 +27,8 @@ Check PostMan:
 Check Eureka:
 [Eureka](http://localhost:8761)
 
-Launch Kong:
+
+##Launch Kong:
 
     ./APIManagers/kong-start.sh
 
@@ -50,16 +51,56 @@ Add Consumer:
 Add Key Auth Plugin
 
 
-
-Launch Tyk:
+##Launch Tyk:
 
     ./APIManagers/tyk-start.sh
 
-Setup:
+###Setup:
+ Settings are in tyk.conf
+ Then run APIManagers > Tyk
 
-Launch WSO2:
+    ./setup.sh 192.168.99.100 <DockerIP>
+
+Add API:
+- Name: Cities
+- Listen path: /cities
+- Target url: http://<ipaddress of local>:8080/cities
+- Add Auth token - Authorisation
+
+Create Key:
+- Name: Cities
+- Pick Never Expires... if you dont want it to break every hour
+- Access Rights: Select Cities API
+- Create - copy key (56f81057d32208000100000122729f8ad80f403457b95620b73c0a78)
+
+?Application was staged at: null
+
+##Launch WSO2:
 
     ./APIManagers/wso2-start.sh
 
 
-Setup:
+###Setup:
+
+Had Issues trying to use docker, IP / Host / Provider..
+Reverted to launching WSO2 Directly
+
+Add API:
+ - [Publisher](https://localhost:9443/publisher) - admin admin
+ - Select have an existing API > then start creating, if you have swagger api... then can using that (io.springfox swagger does not work with spring data rest HAL representation)
+ - Name: demo
+ - version: 1.0
+ - API Definition: add /cities, select get.. click add
+ - Implementation: add http://localhost:8080 for prod and sandbox
+ - Manage: select tier... publish..
+
+API Store:
+ - [API Store](https://localhost:9443/store) - admin admin
+ - Goto subscriptions - generate keys
+ - Goto api - subscribe
+ - Goto api console tab... test api
+
+Then had what seems to be cert issues...
+
+could not call via postman even though could call via their test on API store.
+added header to chrome, accessed api like that... after that postman worked

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+docker stop wso2-con
+docker rm wso2-con
+
+docker run -d -p 9443:9443 -p 9763:9763 -p 8243:8243 -p 8280:8280 -p 10397:10397 -p 7711:7711 --name wso2-con discovery/wso2

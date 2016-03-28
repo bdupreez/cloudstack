@@ -17,6 +17,104 @@
         <relativePath>../Parent</relativePath>
     </parent>
 
+    <profiles>
+        <profile>
+            <id>generate-from-swagger</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>2.1.5</version>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <inputSpec>src/main/resources/swagger.yaml</inputSpec>
+                                    <!--<language>typescript-angular</language>-->
+                                    <language>spring-mvc</language>
+                                    <output>${project.basedir}/generated</output>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>add-source</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>generated/src/main/java</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>generate-to-swagger</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.kongchen</groupId>
+                        <artifactId>swagger-maven-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <springmvc>true</springmvc>
+                                    <locations>net.briandupreez.api</locations>
+                                    <schemes>http,https</schemes>
+                                    <host>localhost</host>
+                                    <basePath>/api</basePath>
+                                    <info>
+                                        <title>Demo Cloud API Managers</title>
+                                        <version>v1</version>
+                                        <description>Demo Cloud API Managers</description>
+                                        <termsOfService>
+                                            http://www.github.com
+                                        </termsOfService>
+                                        <contact>
+                                            <email>bdupreez@gmail.com</email>
+                                            <name>Brian Du Preez</name>
+                                            <url>http</url>
+                                        </contact>
+                                        <license>
+                                            <url>http://www.license.com</url>
+                                            <name>License</name>
+                                        </license>
+                                    </info>
+                                    <templatePath>${basedir}/templates/strapdown.html.hbs</templatePath>
+                                    <outputPath>${basedir}/generated/document.html</outputPath>
+                                    <swaggerDirectory>generated/swagger-ui</swaggerDirectory>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -62,6 +160,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-core</artifactId>
+            <version>2.4.0</version>
         </dependency>
     </dependencies>
 

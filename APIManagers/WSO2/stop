@@ -1,0 +1,4 @@
+#! /bin/bash
+
+docker stop wso2-con
+docker rm wso2-con
