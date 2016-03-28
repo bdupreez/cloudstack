@@ -12,6 +12,8 @@
         <module>Microservice</module>
         <module>Eureka</module>
         <module>Config</module>
+        <module>Dashboard</module>
+        <module>Turbine</module>
     </modules>
 
     <packaging>pom</packaging>

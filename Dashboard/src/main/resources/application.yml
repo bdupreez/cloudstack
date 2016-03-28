@@ -1,0 +1,22 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: dashboard
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    hostname: dashboard
+    nonSecurePort: 9000
+    statusPageUrl: http://${eureka.hostname}/info
+    healthCheckUrl: http://${eureka.hostname}/health
+    homePageUrl: http://${eureka.hostname}/
+
+

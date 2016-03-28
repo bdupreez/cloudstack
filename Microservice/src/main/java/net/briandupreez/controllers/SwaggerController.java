@@ -1,4 +1,4 @@
-package net.briandupreez;
+package net.briandupreez.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

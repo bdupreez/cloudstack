@@ -1,4 +1,4 @@
-package net.briandupreez;
+package net.briandupreez.config;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Predicate;
@@ -27,16 +27,14 @@ import static com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
-/**
- * Created by NATHAN2 on 06/09/2015.
- */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
     private Predicate<String> paths() {
         return or(
-                regex("/cities")
+                regex("/cities"),
+                regex("/process")
         );
     }
 
