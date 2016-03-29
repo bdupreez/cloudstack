@@ -5,10 +5,6 @@ spring:
   rabbitmq:
     host: dockerhost
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
 
 #Dont have defaults... fail if config server not avaliable
 #version:
